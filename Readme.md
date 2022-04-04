@@ -40,9 +40,11 @@ You will also need a power supply capable of powering the LED's at 12v and a sup
 
 As mentioned above, the case was sourced from Thingiverse at this [link]([Retro 7 Segment Clock (Complete) by parallyze - Thingiverse](https://www.thingiverse.com/thing:3014572))
 
-It is best to ensure that you have all the parts printed prior to assembly however if you are itching to get started, printing just the base frame is enough.  This case is intended for WS2812 LED's however some minor modifications to the LED's make it usable with WS2811.  Each Segment requires 2 strips of LED tape.  One strip is four sets of LED's long and the second is three sets long, each set is made up of 3 LED's, most tape is marked with cut lines.  These are soldered together with short pieces of insulated wire.  Starting at the left side of the centre segment, wrap the four segment tape around the segments moving clockwise, making sure they are fully down between the retaining tabs.  You should end up with 3 LED's per clock segment. The second piece of LED tape starts where the first finishes and is wrapped counter clockwise with short wires passing to the next digit. The first digit is where your wires will exit for connecting to power and ESP8266.
+It is best to ensure that you have all the parts printed prior to assembly however if you are itching to get started, printing just the base frame is enough.  This case is intended for WS2812 LED's however some minor modifications to the LED's make it usable with WS2811.  Each Segment requires 2 strips of LED tape.  One strip is four sets of LED's long and the second is three sets long, each set is made up of 3 LED's, most tape is marked with cut lines.  These are soldered together with short pieces of insulated wire.  Starting at the left side of the centre segment, wrap the four segment tape around the segments moving counter clockwise, making sure they are fully down between the retaining tabs.  You should end up with 3 LED's per clock segment. The second piece of LED tape starts where the first finishes with the connecting wire between the segments and is wrapped counter clockwise with short connecting wires passing to the next digit. The first digit is where your wires will exit for connecting to power and ESP8266.
 
-Each digit is constructed the same way.  Follow the build instructions on Thingiverse and refer to the image below.
+Each digit is constructed the same way.  Follow the build instructions on Thingiverse and refer to the image in this repository.
+
+The only difference is the colon where you should end up with 2 LED's in one segment and three in the other.  This makes little difference to the overall brightness of this segment.  It is best to solder the strips as you go, pulling them away from the case a wee bit to facilitate the soldering.  This way you can ensure that the connecting wires are the correct length.  There is little room for bundling up wire.
 
 ## Code
 
@@ -82,6 +84,6 @@ The remainder of the items in this file are either self explanatory or can be un
 
 On startup Timezone is set and the LED's are initialised and a connection to WiFi is made.  The code will make multiple attempts to connect to WiFi as defined by WIFI_TRY_MAX, if this fails the LED's will flash a sequence to identify error.  Once WiFi connection is made, time is pulled via NTP in get_time() and stored in a number of variables.  EPOCH time is also stored and is used with Sunrise/Sunset.  An allowance is made for DST.  A timer interrupt is enabled which "ticks" each second and increments an internal epoch counter which is used in loop() to determine whether to increment minute and hour.  Once setup, the code in loop() simply checks the number of seconds, incrementing minutes and hours as necessary and updating the time on the display.
 
-Code checks whether it is time for a refresh of time and whether the display should be dimmed depending on the settings for sunrise and sunset, if there are used.
+Code checks whether it is time for a refresh of time and whether the display should be dimmed depending on the settings for sunrise and sunset, if they are used.
 
 
