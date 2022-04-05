@@ -163,7 +163,7 @@ void display_time(byte hours,byte minutes){
           #ifdef HOUR24
                display_number(1,1);
           #endif
-          display_number(2, int(hours/10));
+          display_number(2, int(hours%10));
      }
      if(hours > 12){
           #ifdef HOUR24
